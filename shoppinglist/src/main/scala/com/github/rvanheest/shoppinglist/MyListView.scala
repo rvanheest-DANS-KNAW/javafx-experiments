@@ -11,6 +11,7 @@ import io.reactivex.rxjavafx.observables.JavaFxObservable
 import scala.collection.JavaConverters._
 
 class MyListView extends ListView[String] with Disposable {
+  setId("my_listview")
   setFocusTraversable(false)
 
   private val dblClickDisposable = JavaFxObservable.eventsOf(this, MouseEvent.MOUSE_CLICKED)

@@ -1,5 +1,6 @@
 package com.github.rvanheest.shoppinglist
 
+import javafx.application.Platform
 import javafx.scene.layout.{ BorderPane, VBox }
 
 import io.reactivex.disposables.{ CompositeDisposable, Disposable }
@@ -25,7 +26,9 @@ class MyApp(addWindow: () => AddWindow) extends BorderPane with Disposable {
 
   private val clearItemsDisposable = menuBar.clearEvent().subscribe(_ => listView.getItems.clear())
 
-  private val compositeDisposable = new CompositeDisposable(addItemDisposable, clearItemsDisposable)
+  private val closeDisposable = menuBar.closeEvent().subscribe(_ => Platform.exit())
+
+  private val compositeDisposable = new CompositeDisposable(addItemDisposable, clearItemsDisposable, closeDisposable)
 
   def isDisposed: Boolean = compositeDisposable.isDisposed
 
