@@ -25,6 +25,13 @@
             <version>2.2.2</version>
         </dependency>
 
+        <!-- JavaFX additions -->
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>8.40.14</version>
+        </dependency>
+
         <!-- CSS -->
         <dependency>
             <groupId>org.kordamp.bootstrapfx</groupId>
