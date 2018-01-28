@@ -24,6 +24,16 @@
             <artifactId>rxjavafx</artifactId>
             <version>2.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjavafx</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxscala_2.12</artifactId>
+            <version>0.26.5</version>
+        </dependency>
 
         <!-- JavaFX additions -->
         <dependency>
