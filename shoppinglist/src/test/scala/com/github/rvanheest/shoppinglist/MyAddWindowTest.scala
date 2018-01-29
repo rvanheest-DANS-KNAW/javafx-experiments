@@ -7,8 +7,10 @@ import javafx.stage.Stage
 
 import org.junit.Assert._
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.testfx.framework.junit.ApplicationTest
 
+@Category(Array(classOf[UITest]))
 class MyAddWindowTest extends ApplicationTest {
 
   private var dialog: AddWindow = _

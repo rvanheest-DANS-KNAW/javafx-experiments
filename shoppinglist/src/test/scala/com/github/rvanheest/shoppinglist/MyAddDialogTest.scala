@@ -3,10 +3,12 @@ package com.github.rvanheest.shoppinglist
 import javafx.scene.Scene
 import javafx.stage.Stage
 
-import org.junit.Test
 import org.junit.Assert._
+import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.testfx.framework.junit.ApplicationTest
 
+@Category(Array(classOf[UITest]))
 class MyAddDialogTest extends ApplicationTest {
 
   private var dialog: MyAddDialog = _

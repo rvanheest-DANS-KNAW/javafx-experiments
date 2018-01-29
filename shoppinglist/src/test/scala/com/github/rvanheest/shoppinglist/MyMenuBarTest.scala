@@ -4,8 +4,10 @@ import javafx.scene.Scene
 import javafx.stage.Stage
 
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.testfx.framework.junit.ApplicationTest
 
+@Category(Array(classOf[UITest]))
 class MyMenuBarTest extends ApplicationTest {
 
   private var menuBar: MyMenuBar = _

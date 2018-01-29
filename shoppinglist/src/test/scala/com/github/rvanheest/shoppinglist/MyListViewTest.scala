@@ -1,14 +1,15 @@
 package com.github.rvanheest.shoppinglist
 
 import javafx.scene.Scene
-import javafx.scene.layout.VBox
 import javafx.stage.Stage
 
 import org.junit.Assert._
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.testfx.framework.junit.ApplicationTest
 import org.testfx.matcher.control.LabeledMatchers
 
+@Category(Array(classOf[UITest]))
 class MyListViewTest extends ApplicationTest {
 
   private var listView: MyListView = _

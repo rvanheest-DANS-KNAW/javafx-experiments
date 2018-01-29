@@ -1,16 +1,16 @@
 package com.github.rvanheest.shoppinglist
 
-import javafx.application.Platform
 import javafx.scene.Scene
 import javafx.scene.control.ListView
-import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 
 import org.junit.Assert._
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.testfx.framework.junit.ApplicationTest
 import org.testfx.matcher.control.ListViewMatchers
 
+@Category(Array(classOf[UITest]))
 class MyAppTest extends ApplicationTest {
 
   private var app: MyApp = _
