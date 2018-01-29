@@ -3,13 +3,25 @@ package com.github.rvanheest.mvi.example_with_lib
 import javafx.scene.control.Label
 import javafx.scene.layout.VBox
 
-import com.github.rvanheest.mvi.lib.mvi.{ BasePresenter, View }
+import com.github.rvanheest.mvi.lib.mvi.{ BasePresenter, Presenter, View }
 import rx.lang.scala.JavaConverters._
+import rx.lang.scala.subscriptions.CompositeSubscription
 import rx.lang.scala.{ Observable, Subscription }
 import rx.schedulers.JavaFxScheduler
 
 import scala.concurrent.duration.DurationInt
 import scala.language.postfixOps
+
+/*
+ * Define BackendService, maybe with a Model
+ * Define the ViewModel
+ * Define the interaction between View and the BackendService(s) using an Interactor, which translates Model to ViewModel
+ * Define View interface with the intents (effects triggered by user) and the render function (translating ViewModel to onscreen effects)
+ * Define Presenter extension from BasePresenter[View, ViewModel], maybe with an initial ViewModel and/or state reducer function
+ *    implements 'bindIntents' by binding the View's intents to the BackendService/Interactor and subscribing to the View's 'render' function
+ * Define UI component, extending the View interface
+ *    also binds the view
+ */
 
 // backend service
 class BmiCalculator {
@@ -25,15 +37,14 @@ class BmiCalculator {
   }.delay(1 second)
 }
 
-// UI's model
+// view model
 sealed abstract class BmiViewState
 case object BmiLoading extends BmiViewState
 case class BmiResult(result: Int) extends BmiViewState
 case class BmiError(error: Throwable) extends BmiViewState
 
-// interaction between backend and frontend
-// translates backend output to the state of the UI
-class BmiInteractor(bmiCalculator: BmiCalculator = new BmiCalculator) {
+// interactor
+class BmiInteractor(bmiCalculator: BmiCalculator) {
 
   def calculateBmi(weight: Int, height: Int): Observable[BmiViewState] = {
     BmiLoading +: bmiCalculator.calcBmi(weight, height)
@@ -43,7 +54,6 @@ class BmiInteractor(bmiCalculator: BmiCalculator = new BmiCalculator) {
 }
 
 // interface for the view
-// defines the intents and the function for rendering the UI's state
 trait BmiView extends View {
   def weightIntent: Observable[Int]
 
@@ -52,9 +62,8 @@ trait BmiView extends View {
   def render(viewState: BmiViewState): Unit
 }
 
-// presenter to the UI
-// sends intents to the interactor/backend, receives the UI's state(s) and calls the rendering function with those
-class BmiPresenter(bmiInteractor: BmiInteractor = new BmiInteractor) extends BasePresenter[BmiView, BmiViewState] with Subscription {
+// presenter
+class BmiPresenter(bmiInteractor: BmiInteractor) extends BasePresenter[BmiView, BmiViewState] {
 
   override protected def bindIntents(): Unit = {
     val weight = intent(_.weightIntent)
@@ -70,14 +79,14 @@ class BmiPresenter(bmiInteractor: BmiInteractor = new BmiInteractor) extends Bas
 }
 
 // the UI element
-class BmiPanel extends VBox(10.0) with BmiView {
+class BmiPanel extends VBox(10.0) with BmiView with Subscription {
 
   private val weight = new Slider("weight", "kg", 40, 150)
   private val height = new Slider("height", "cm", 0, 220)
   private val label = new Label()
+  private val presenter = createPresenter()
+  private val subscription = CompositeSubscription() += weight += height += presenter
   getChildren.addAll(weight, height, label)
-
-  val presenter = new BmiPresenter()
   presenter.attachView(this)
 
   override def weightIntent: Observable[Int] = weight.sliderIntent
@@ -88,5 +97,14 @@ class BmiPanel extends VBox(10.0) with BmiView {
     case BmiLoading => label.setText("calculating...")
     case BmiResult(bmi) => label.setText(s"BMI: $bmi")
     case BmiError(error) => label.setText(s"An error occurred: ${error.getMessage}")
+  }
+
+  protected def createPresenter(): BmiPresenter = Injection.newBmiPresenter()
+
+  override def isUnsubscribed: Boolean = subscription.isUnsubscribed && super.isUnsubscribed
+
+  override def unsubscribe(): Unit = {
+    subscription.unsubscribe()
+    super.unsubscribe()
   }
 }

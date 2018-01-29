@@ -76,7 +76,7 @@ class BmiPanel extends VBox(10.0) with BmiView with Subscription {
   private val weight = new Slider("weight", "kg", 40, 150)
   private val height = new Slider("height", "cm", 0, 220)
   private val label = new Label()
-  private val presenter = Injection.newBmiPresenter()
+  private val presenter = createPresenter()
   private val subscription = CompositeSubscription() += weight += height += presenter
   getChildren.addAll(weight, height, label)
   presenter.attachView(this)
@@ -90,6 +90,8 @@ class BmiPanel extends VBox(10.0) with BmiView with Subscription {
     case BmiResult(bmi) => label.setText(s"BMI: $bmi")
     case BmiError(error) => label.setText(s"An error occurred: ${ error.getMessage }")
   }
+
+  protected def createPresenter(): BmiPresenter = Injection.newBmiPresenter()
 
   override def isUnsubscribed: Boolean = subscription.isUnsubscribed && super.isUnsubscribed
 

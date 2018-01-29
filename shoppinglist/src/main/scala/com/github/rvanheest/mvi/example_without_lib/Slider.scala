@@ -11,9 +11,8 @@ class Slider(labelText: String, unit: String, min: Int, max: Int) extends HBox(1
 
   private val label: Label = new Label()
   private val slider: JFXSlider = new JFXSlider(min, max, (min + max) / 2)
-  getChildren.addAll(label, slider)
-
   private val subscription = sliderIntent.subscribe(v => this.render(v))
+  getChildren.addAll(label, slider)
 
   def render(model: Int): Unit = {
     label.setText(s"$labelText: $model$unit")

@@ -1,7 +1,7 @@
 package com.github.rvanheest.mvi.lib.mvi
 
-trait Presenter[V <: View] {
-  def attachView(view: V): Unit
+import rx.lang.scala.Subscription
 
-  def detachView(): Unit
+trait Presenter[V <: View] extends Subscription {
+  def attachView(view: V): Unit
 }

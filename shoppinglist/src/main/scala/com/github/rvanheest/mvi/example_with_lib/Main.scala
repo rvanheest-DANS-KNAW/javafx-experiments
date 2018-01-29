@@ -14,10 +14,10 @@ class Main extends Application {
     }
 
     primaryStage.setScene(new Scene(root, 300, 250))
-//    primaryStage.setOnCloseRequest(_ => {
-//      if (!root.isUnsubscribed)
-//        root.unsubscribe()
-//    })
+    primaryStage.setOnCloseRequest(_ => {
+      if (!root.isUnsubscribed)
+        root.unsubscribe()
+    })
     primaryStage.setTitle("BMI calculator")
     primaryStage.show()
   }

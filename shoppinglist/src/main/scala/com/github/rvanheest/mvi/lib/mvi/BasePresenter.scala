@@ -44,7 +44,11 @@ abstract class BasePresenter[V <: View, ViewState] private(viewStateBehaviorSubj
     viewAttachedFirstTime = false
   }
 
-  override def detachView(): Unit = {
+  override def isUnsubscribed: Boolean = {
+    List(viewRelayConsumerSubscription, intentSubscriptions, viewStateSubscription).forall(_.isUnsubscribed) && super.isUnsubscribed
+  }
+
+  override def unsubscribe(): Unit = {
     if (viewRelayConsumerSubscription != null) {
       viewRelayConsumerSubscription.unsubscribe()
       viewRelayConsumerSubscription = null
@@ -60,6 +64,7 @@ abstract class BasePresenter[V <: View, ViewState] private(viewStateBehaviorSubj
 
     unbindIntents()
     reset()
+    super.unsubscribe()
   }
 
   private def reset(): Unit = {
