@@ -12,6 +12,7 @@
     <modules>
         <module>shoppinglist</module>
         <module>shoppinglistscalafx</module>
+        <module>mvi</module>
     </modules>
 
     <properties>

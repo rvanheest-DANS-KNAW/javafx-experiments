@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>javafx-experiments</artifactId>
+        <groupId>com.github.rvanheest</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mvi</artifactId>
+
+    <dependencies>
+        <!-- Reactive Programming -->
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjavafx</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxscala_2.12</artifactId>
+            <version>0.26.5</version>
+        </dependency>
+
+        <!-- JavaFX additions -->
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>8.40.14</version>
+        </dependency>
+
+        <!-- CSS -->
+        <dependency>
+            <groupId>org.kordamp.bootstrapfx</groupId>
+            <artifactId>bootstrapfx-core</artifactId>
+            <version>0.2.2</version>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit</artifactId>
+            <version>4.0.10-alpha</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/scala</sourceDirectory>
+        <testSourceDirectory>src/test/scala</testSourceDirectory>
+
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.scalatest</groupId>-->
+                <!--<artifactId>scalatest-maven-plugin</artifactId>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    </build>
+</project>
