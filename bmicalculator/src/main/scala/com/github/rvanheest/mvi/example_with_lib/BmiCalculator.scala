@@ -5,7 +5,6 @@ import javafx.scene.layout.VBox
 
 import com.github.rvanheest.mvi.lib.{ BasePresenter, View }
 import rx.lang.scala.JavaConverters._
-import rx.lang.scala.subscriptions.CompositeSubscription
 import rx.lang.scala.{ Observable, Subscription }
 import rx.schedulers.JavaFxScheduler
 
@@ -85,7 +84,6 @@ class BmiPanel extends VBox(10.0) with BmiView with Subscription {
   private val height = new Slider("height", "cm", 0, 220)
   private val label = new Label()
   private val presenter = createPresenter()
-  private val subscription = CompositeSubscription() += weight += height += presenter
   getChildren.addAll(weight, height, label)
   presenter.attachView(this)
 
@@ -101,10 +99,13 @@ class BmiPanel extends VBox(10.0) with BmiView with Subscription {
 
   protected def createPresenter(): BmiPresenter = Injection.newBmiPresenter()
 
-  override def isUnsubscribed: Boolean = subscription.isUnsubscribed && super.isUnsubscribed
+  override def isUnsubscribed: Boolean = {
+    weight.isUnsubscribed && height.isUnsubscribed && super.isUnsubscribed
+  }
 
   override def unsubscribe(): Unit = {
-    subscription.unsubscribe()
+    weight.unsubscribe()
+    height.unsubscribe()
     super.unsubscribe()
   }
 }

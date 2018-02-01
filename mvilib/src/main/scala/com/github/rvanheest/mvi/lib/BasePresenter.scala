@@ -7,6 +7,7 @@ import rx.lang.scala.{ Observable, Subscription }
 import rx.subjects.PublishSubject
 
 import scala.collection.mutable.ListBuffer
+import scala.language.postfixOps
 
 abstract class BasePresenter[V <: View, ViewState] private(viewStateBehaviorSubject: BehaviorSubject[ViewState]) extends Presenter[V] {
 
@@ -45,7 +46,9 @@ abstract class BasePresenter[V <: View, ViewState] private(viewStateBehaviorSubj
   }
 
   override def isUnsubscribed: Boolean = {
-    List(viewRelayConsumerSubscription, intentSubscriptions, viewStateSubscription).forall(_.isUnsubscribed) && super.isUnsubscribed
+    List(viewRelayConsumerSubscription, intentSubscriptions, viewStateSubscription)
+      .filterNot(null ==)
+      .forall(_.isUnsubscribed) && super.isUnsubscribed
   }
 
   override def unsubscribe(): Unit = {
