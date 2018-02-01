@@ -3,7 +3,7 @@ package com.github.rvanheest.mvi.example_with_lib
 import javafx.scene.control.Label
 import javafx.scene.layout.VBox
 
-import com.github.rvanheest.mvi.lib.mvi.{ BasePresenter, View }
+import com.github.rvanheest.mvi.lib.{ BasePresenter, View }
 import rx.lang.scala.JavaConverters._
 import rx.lang.scala.subscriptions.CompositeSubscription
 import rx.lang.scala.{ Observable, Subscription }

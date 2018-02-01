@@ -1,4 +1,4 @@
-package com.github.rvanheest.mvi.lib.mvi
+package com.github.rvanheest.mvi.lib
 
 import rx.lang.scala.JavaConverters._
 import rx.lang.scala.subjects.BehaviorSubject

@@ -13,6 +13,7 @@
         <module>shoppinglist</module>
         <module>shoppinglistscalafx</module>
         <module>mvi</module>
+        <module>mvilib</module>
     </modules>
 
     <properties>
