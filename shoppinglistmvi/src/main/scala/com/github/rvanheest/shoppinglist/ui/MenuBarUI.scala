@@ -1,16 +1,15 @@
 package com.github.rvanheest.shoppinglist.ui
 
-import javafx.event.ActionEvent
-import javafx.scene.control.{ Menu, MenuBar, MenuItem }
-import javafx.scene.input.{ KeyCode, KeyCodeCombination, KeyCombination }
+import javafx.scene.control.{Menu, MenuBar, MenuItem}
+import javafx.scene.input.{KeyCode, KeyCodeCombination, KeyCombination}
 import javafx.stage.Window
 
 import com.github.rvanheest.mvi.lib.View
 import com.github.rvanheest.shoppinglist.Injection
 import com.github.rvanheest.shoppinglist.presenter.MenuBarPresenter
-import rx.lang.scala.{ Observable, Subscription }
 import rx.lang.scala.JavaConverters._
 import rx.lang.scala.subjects.PublishSubject
+import rx.lang.scala.{Observable, Subscription}
 import rx.observables.JavaFxObservable
 
 case class MenuBarViewState(showAddWindow: Boolean)
@@ -63,8 +62,8 @@ class MenuBarUI(owner: Window) extends MenuBar with MenuBarView with Subscriptio
   def render(viewState: MenuBarViewState): Unit = {
     if (addWindow == null && viewState.showAddWindow) {
       addWindow = newAddWindow()
+      JavaFxObservable.fromDialog(addWindow).asScala.foreach(addWindowReceivedElements.onNext)
       // unsubscribing will be done automatically by fromDialog
-      JavaFxObservable.fromDialog(addWindow).asScala.subscribe(addWindowReceivedElements)
     }
     else if (addWindow != null && !viewState.showAddWindow) {
       addWindow = null

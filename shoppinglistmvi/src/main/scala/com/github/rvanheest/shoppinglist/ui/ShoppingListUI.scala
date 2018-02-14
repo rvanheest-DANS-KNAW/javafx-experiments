@@ -2,7 +2,7 @@ package com.github.rvanheest.shoppinglist.ui
 
 import javafx.event.EventTarget
 import javafx.scene.Node
-import javafx.scene.control.{ ListCell, ListView }
+import javafx.scene.control.{ListCell, ListView}
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.StackPane
 
@@ -10,12 +10,13 @@ import com.github.rvanheest.mvi.lib.View
 import com.github.rvanheest.shoppinglist.Injection
 import com.github.rvanheest.shoppinglist.presenter.ShoppingListPresenter
 import rx.lang.scala.JavaConverters._
-import rx.lang.scala.{ Observable, OptionToObservable, Subscription }
+import rx.lang.scala.{Observable, OptionToObservable, Subscription}
 import rx.observables.JavaFxObservable
 
 import scala.collection.JavaConverters._
 
 sealed abstract class ShoppingListState
+
 object ShoppingListState {
   case class Result(items: Seq[String]) extends ShoppingListState
   case class Error(e: Throwable) extends ShoppingListState
