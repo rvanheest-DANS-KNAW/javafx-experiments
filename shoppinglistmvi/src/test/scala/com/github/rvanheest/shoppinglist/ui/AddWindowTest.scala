@@ -5,10 +5,13 @@ import javafx.scene.Scene
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 
+import com.github.rvanheest.shoppinglist.UITest
 import org.junit.Assert.{ assertEquals, assertFalse }
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.testfx.framework.junit.ApplicationTest
 
+@Category(Array(classOf[UITest]))
 class AddWindowTest extends ApplicationTest {
 
   private var dialog: AddWindow = _

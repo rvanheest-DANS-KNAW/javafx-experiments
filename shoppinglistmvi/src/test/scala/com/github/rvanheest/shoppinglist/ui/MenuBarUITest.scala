@@ -3,16 +3,19 @@ package com.github.rvanheest.shoppinglist.ui
 import java.util.concurrent.TimeUnit
 import javafx.application.Platform
 import javafx.scene.Scene
-import javafx.stage.{Stage, Window}
+import javafx.stage.{ Stage, Window }
 
+import com.github.rvanheest.shoppinglist.UITest
 import com.github.rvanheest.shoppinglist.presenter.MenuBarPresenter
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.runners.MockitoJUnitRunner
 import org.testfx.framework.junit.ApplicationTest
 import rx.lang.scala.observers.TestSubscriber
 
+@Category(Array(classOf[UITest]))
 @RunWith(classOf[MockitoJUnitRunner])
 class MenuBarUITest extends ApplicationTest {
 

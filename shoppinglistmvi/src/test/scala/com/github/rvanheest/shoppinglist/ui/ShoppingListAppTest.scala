@@ -5,11 +5,14 @@ import javafx.scene.Scene
 import javafx.scene.control.ListView
 import javafx.stage.Stage
 
+import com.github.rvanheest.shoppinglist.UITest
 import org.junit.Assert.{ assertFalse, assertTrue }
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.testfx.framework.junit.ApplicationTest
 import org.testfx.matcher.control.LabeledMatchers
 
+@Category(Array(classOf[UITest]))
 class ShoppingListAppTest extends ApplicationTest {
 
   private var app: ShoppingListApp = _

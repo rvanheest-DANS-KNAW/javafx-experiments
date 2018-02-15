@@ -4,16 +4,19 @@ import java.util.concurrent.TimeUnit
 import javafx.scene.Scene
 import javafx.stage.Stage
 
+import com.github.rvanheest.shoppinglist.UITest
 import com.github.rvanheest.shoppinglist.presenter.ShoppingListPresenter
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.runners.MockitoJUnitRunner
 import org.testfx.api.FxAssert.verifyThat
 import org.testfx.framework.junit.ApplicationTest
-import org.testfx.matcher.control.{LabeledMatchers, ListViewMatchers}
+import org.testfx.matcher.control.{ LabeledMatchers, ListViewMatchers }
 import rx.lang.scala.observers.TestSubscriber
 
+@Category(Array(classOf[UITest]))
 @RunWith(classOf[MockitoJUnitRunner])
 class ShoppingListUITest extends ApplicationTest {
 
@@ -64,7 +67,7 @@ class ShoppingListUITest extends ApplicationTest {
     val state = ShoppingListState.Result(Seq("foo", "bar", "baz", "qux", "quux"))
     shoppingList.render(state)
 
-    sleep(200, TimeUnit.MILLISECONDS)
+    sleep(500, TimeUnit.MILLISECONDS)
     doubleClickOn(LabeledMatchers.hasText("bar"))
 
     testObserver.assertValue(1)

@@ -84,6 +84,32 @@
                 <groupId>org.scalatest</groupId>
                 <artifactId>scalatest-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20.1</version>
+                <configuration>
+                    <excludedGroups>${testcase.groups}</excludedGroups>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>with-ui-tests</id>
+            <properties>
+                <testcase.groups/>
+            </properties>
+        </profile>
+        <profile>
+            <id>default</id>
+            <properties>
+                <testcase.groups>com.github.rvanheest.shoppinglist.UITest</testcase.groups>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 </project>

@@ -69,11 +69,6 @@
         <testSourceDirectory>src/test/scala</testSourceDirectory>
 
         <plugins>
-            <!--<plugin>-->
-                <!--<groupId>org.scalatest</groupId>-->
-                <!--<artifactId>scalatest-maven-plugin</artifactId>-->
-            <!--</plugin>-->
-
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20.1</version>

@@ -1,8 +1,10 @@
 package com.github.rvanheest.shoppinglist.presenter
 
+import com.github.rvanheest.shoppinglist.UITest
 import com.github.rvanheest.shoppinglist.backend.ShoppingListAPI
 import com.github.rvanheest.shoppinglist.interactor.ShoppingListInteractor
 import com.github.rvanheest.shoppinglist.ui.{ ShoppingListState, ShoppingListView }
+import org.junit.experimental.categories.Category
 import org.junit.runner.RunWith
 import org.junit.{ After, Before, Test }
 import org.mockito.Matchers.{ eq => matches, _ }
@@ -12,6 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner
 import org.testfx.framework.junit.ApplicationTest
 import rx.lang.scala.Observable
 
+@Category(Array(classOf[UITest]))
 @RunWith(classOf[MockitoJUnitRunner])
 class ShoppingListPresenterTest extends ApplicationTest {
 
