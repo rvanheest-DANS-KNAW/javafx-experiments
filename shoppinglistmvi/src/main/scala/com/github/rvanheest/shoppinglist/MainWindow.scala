@@ -4,12 +4,12 @@ import javafx.application.Application
 import javafx.scene.Scene
 import javafx.stage.Stage
 
-import com.github.rvanheest.shoppinglist.ui.MyApp
+import com.github.rvanheest.shoppinglist.ui.ShoppingListApp
 
 class MainWindow extends Application {
 
   def start(primaryStage: Stage): Unit = {
-    val app = new MyApp(primaryStage)
+    val app = new ShoppingListApp(primaryStage)
 
     primaryStage.setOnCloseRequest(_ => {
       if (!app.isUnsubscribed)

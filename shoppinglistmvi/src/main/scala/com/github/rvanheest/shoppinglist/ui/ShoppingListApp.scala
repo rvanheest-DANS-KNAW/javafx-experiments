@@ -5,7 +5,7 @@ import javafx.stage.Window
 
 import rx.lang.scala.Subscription
 
-class MyApp(owner: Window) extends BorderPane with Subscription {
+class ShoppingListApp(owner: Window) extends BorderPane with Subscription {
 
   private val menuBar = new MenuBarUI(owner)
   private val header = new Header("Shopping list")
